@@ -6,6 +6,21 @@ This is my attempt to make rally useable.  It uses the RESTful interface.
 = Installation
   sudo gem install rally_rest_api
   git clone git@github.com:jkamenik/Rally-Sucks.git
+
+= Usage
+== Config file
+Each script will eval ~/.conf.rb.
+  {
+    username: 'your user name',
+    password: 'your password',
+    my_team: ['your user name']
+  }
+  
+Additionally you can add any number of "_team" arrays.  Each of these arrays represents a group of users on a team.
+  ruby list_tasks.rb
+    Lists all US/DE/TAs owned by the my_team group
+  ruby list_tasks.rb ui
+    Lists all US/DE/TAs owned by the ui_team group
   
 = Resources
 * https://rally1.rallydev.com/slm/doc/webservice/index.jsp
