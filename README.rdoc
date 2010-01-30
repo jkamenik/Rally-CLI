@@ -1,0 +1,13 @@
+= Purpose
+The Rally UI sucks and anyone that has been subjected to it will either agree with me, or they are paid by Rally.  It may be fine for high level requirements, but for day to day working it is bloated and useless.
+
+This is my attempt to make rally useable.  It uses the RESTful interface.
+
+= Installation
+  sudo gem install rally_rest_api
+  git clone git@github.com:jkamenik/Rally-Sucks.git
+  
+= Resources
+* https://rally1.rallydev.com/slm/doc/webservice/index.jsp
+* http://rally-rest-api.rubyforge.org/rally_rest_api/
+* http://agilecommons.org/hives/f3db243ed7/summary
