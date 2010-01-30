@@ -6,6 +6,9 @@ File.open("#{ENV['HOME']}/.conf.rb") do |f|
   # puts f.readlines.join('')
   config = eval(f.readlines.join(''))
 end
+team = ARGV[0] || 'my'
+owners = config["#{team}_team".to_sym] || []
+puts owners
 
 rally = RallyRestAPI.new(
   :username => config[:username],
@@ -38,7 +41,11 @@ rally.find(:hierarchical_requirement, :order => [:rank]){
     end
   }
   lt :schedule_state, 'Completed'
-  equal :owner, config[:self]
+  _or_ {
+    owners.each do |x|
+      equal :owner, x
+    end
+  }
 }.each do |us|
   rank = us.rank || '---'
   puts "#{rank} #{us.formatted_i_d} #{us.schedule_state} #{us.owner} #{us.name}"
@@ -56,7 +63,11 @@ des = rally.find(:defect, :order => [:rank, :priority]){
     lt :schedule_state, 'Completed'
     lt :state, 'Fixed'
   }
-  equal :owner, config[:self]
+  _or_ {
+    owners.each do |x|
+      equal :owner, x
+    end
+  }
 }.each do |de|
   rank = de.rank || '---'
   puts "#{rank} #{de.formatted_i_d} #{de.priority} #{de.schedule_state} #{de.state} #{de.owner}"
@@ -72,7 +83,11 @@ rally.find(:task, :order => :rank){
     end
   }
   lt :state, 'Completed'
-  equal :owner, config[:self]
+  _or_ {
+    owners.each do |x|
+      equal :owner, x
+    end
+  }
 }.each do |ta|
   rank = ta.rank || '---'
   puts "#{rank} #{ta.formatted_i_d}(#{ta.work_product.formatted_i_d}) #{ta.state} #{ta.owner} #{ta.name}"
