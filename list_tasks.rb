@@ -1,12 +1,13 @@
 require 'rubygems'
 require 'rally_rest_api'
 require 'date'
+require File.dirname(__FILE__)+"/common"
 
-config = {}
-File.open("#{ENV['HOME']}/.conf.rb") do |f|
-  # puts f.readlines.join('')
-  config = eval(f.readlines.join(''))
-end
+config = Common.load_config
+# File.open("#{ENV['HOME']}/.conf.rb") do |f|
+#   # puts f.readlines.join('')
+#   config = eval(f.readlines.join(''))
+# end
 team = ARGV[0] || 'my'
 owners = config["#{team}_team".to_sym] || []
 puts owners
@@ -91,7 +92,8 @@ rally.find(:task, :order => :rank){
   }
 }.each do |ta|
   rank = ta.rank || '---'
+  puts ' '*20+'-'*40+' '*20
   puts "#{rank} #{ta.formatted_i_d}(#{ta.work_product.formatted_i_d}) #{ta.state} #{ta.owner} #{ta.name}"
-  puts "\t#{ta.description}" if ta.description
+  puts Common.escape(ta.description) if ta.description
 end
 puts '-'*80

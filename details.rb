@@ -1,11 +1,12 @@
 require 'rubygems'
 require 'rally_rest_api'
+require 'common'
 
-config = {}
-File.open("#{ENV['HOME']}/.conf.rb") do |f|
-  # puts f.readlines.join('')
-  config = eval(f.readlines.join(''))
-end
+config = Common.load_config
+# File.open("#{ENV['HOME']}/.conf.rb") do |f|
+#   # puts f.readlines.join('')
+#   config = eval(f.readlines.join(''))
+# end
 
 if(ARGV.count < 1 || ARGV[0].size <= 2)
   puts "Valid ID required"
@@ -28,9 +29,9 @@ def print_us(id,rally)
     puts "#{us.release} #{us.iteration}"
     puts "Tags: #{us.tags.join(', ')}" if us.tags
     puts "-"*80
-    puts us.notes.gsub("<br>","\n").gsub("<br />","\n") if us.notes
+    puts Common.escape(us.notes) if us.notes
     puts "-"*80
-    puts us.description.gsub("<br>","\n").gsub("<br />","\n") if us.description
+    puts Common.escape(us.description) if us.description
   end
 end
 
@@ -49,9 +50,9 @@ def print_de(id,rally)
     puts "Sev:#{de.severity}, SchState:#{de.schedule_state}, Found:#{de.found_in_build}"
     puts "Tags: #{de.tags.join(', ')}" if de.tags
     puts "-"*80
-    puts de.notes.gsub("<br>","\n").gsub("<br />","\n") if de.notes
+    puts Common.escape(de.notes) if de.notes
     puts "-"*80
-    puts de.description.gsub("<br>","\n").gsub("<br />","\n") if de.description
+    puts Common.escape(de.description) if de.description
   end
 end
 
