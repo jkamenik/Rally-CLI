@@ -93,7 +93,7 @@ rally.find(:task, :order => :rank){
 }.each do |ta|
   rank = ta.rank || '---'
   puts ' '*20+'-'*40+' '*20
-  puts "#{rank} #{ta.formatted_i_d}(#{ta.work_product.formatted_i_d}) #{ta.state} #{ta.owner} #{ta.name}"
+  puts Common.escape "#{rank} #{ta.formatted_i_d}(#{ta.work_product.formatted_i_d}) #{ta.state} #{ta.owner} #{ta.name}"
   puts Common.escape(ta.description) if ta.description
 end
 puts '-'*80
