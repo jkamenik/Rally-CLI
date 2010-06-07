@@ -13,14 +13,24 @@ Each script will eval ~/.conf.rb.
   {
     username: 'your user name',
     password: 'your password',
-    my_team: ['your user name']
+    my_team: ['your login id']
   }
   
 Additionally you can add any number of "_team" arrays.  Each of these arrays represents a group of users on a team.
+
+=== Example
+Assume you have the following .conf.rb file
+  {
+    username: 'me',
+    password: 'secret',
+    my_team: ['me'],
+    our_team: ['you','me']
+  }
+
   ruby list_tasks.rb
-    Lists all US/DE/TAs owned by the my_team group
-  ruby list_tasks.rb ui
-    Lists all US/DE/TAs owned by the ui_team group
+    Lists all US/DE/TAs owned by the my_team group, which is the user "me"
+  ruby list_tasks.rb our
+    Lists all US/DE/TAs owned by the our_team group, which is "you" and "me"
   
 = Resources
 * https://rally1.rallydev.com/slm/doc/webservice/index.jsp
