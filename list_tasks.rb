@@ -1,3 +1,4 @@
+#!/usr/local/bin/ruby
 require 'rubygems'
 require 'rally_rest_api'
 require 'date'
@@ -55,7 +56,7 @@ end
 puts '-'*80
 
 puts 'Defects: '
-des = rally.find(:defect, :order => [:rank, :priority]){
+des = rally.find(:defect, :order => [:priority]){
   _or_ {
     iterations.each do |i|
       equal :iteration, i
@@ -73,7 +74,7 @@ des = rally.find(:defect, :order => [:rank, :priority]){
 }.each do |de|
   rank = de.rank || '---'
   puts "#{rank} #{de.formatted_i_d} #{de.priority} #{de.schedule_state} #{de.state} #{de.owner}"
-  puts "\t#{de.name}"
+  puts "\t#{Common.escape de.name}"
 end
 puts '-'*80
 

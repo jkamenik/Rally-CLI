@@ -1,3 +1,4 @@
+#!/usr/local/bin/ruby
 require 'rubygems'
 require 'rally_rest_api'
 require 'common'
