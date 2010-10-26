@@ -30,5 +30,21 @@ class Common
       end
       changed
     end
+    
+    def std_rank(obj)
+      obj.rank || '---'
+    end
+    
+    def std_us(us)
+      escape "#{std_rank(us)} #{us.formatted_i_d} #{us.schedule_state} #{us.owner} #{us.name}"
+    end
+    
+    def std_ta(ta)
+      escape "#{std_rank(ta)} #{ta.formatted_i_d}(#{ta.work_product.formatted_i_d}) #{ta.state} #{ta.owner} #{ta.name}"
+    end
+    
+    def std_de(de)
+      escape "#{std_rank(de)} #{de.formatted_i_d} #{de.priority} #{de.schedule_state} #{de.state} #{de.owner}\n\t#{de.name}"
+    end
   end
 end

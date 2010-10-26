@@ -1,4 +1,3 @@
-#!/usr/local/bin/ruby
 require 'rubygems'
 require 'rally_rest_api'
 require 'date'
@@ -50,13 +49,12 @@ rally.find(:hierarchical_requirement, :order => [:rank]){
     end
   }
 }.each do |us|
-  rank = us.rank || '---'
-  puts "#{rank} #{us.formatted_i_d} #{us.schedule_state} #{us.owner} #{us.name}"
+  puts Common.std_us us
 end
 puts '-'*80
 
 puts 'Defects: '
-des = rally.find(:defect, :order => [:priority]){
+des = rally.find(:defect, :order => [:rank, :priority]){
   _or_ {
     iterations.each do |i|
       equal :iteration, i
@@ -72,9 +70,7 @@ des = rally.find(:defect, :order => [:priority]){
     end
   }
 }.each do |de|
-  rank = de.rank || '---'
-  puts "#{rank} #{de.formatted_i_d} #{de.priority} #{de.schedule_state} #{de.state} #{de.owner}"
-  puts "\t#{Common.escape de.name}"
+  puts Common.std_de de
 end
 puts '-'*80
 
@@ -92,9 +88,8 @@ rally.find(:task, :order => :rank){
     end
   }
 }.each do |ta|
-  rank = ta.rank || '---'
   puts ' '*20+'-'*40+' '*20
-  puts Common.escape "#{rank} #{ta.formatted_i_d}(#{ta.work_product.formatted_i_d}) #{ta.state} #{ta.owner} #{ta.name}"
+  puts Common.std_ta ta
   puts Common.escape(ta.description) if ta.description
 end
 puts '-'*80
