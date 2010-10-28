@@ -12,7 +12,9 @@ class Common
     @@rally_types = {
       :tags => :tag,
       :ta   => :task,
+      :tas  => :task,
       :de   => :defect,
+      :des  => :defect,
       :us   => :hierarchical_requirement
     }
     
