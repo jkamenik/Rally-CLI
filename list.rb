@@ -1,3 +1,4 @@
+#!/usr/local/bin/ruby
 require 'rubygems'
 require 'rally_rest_api'
 require 'date'
@@ -20,6 +21,6 @@ rally = RallyRestAPI.new(
   :password => config[:password]
 )
 
-rally.find_all(Common.rally_type(type)).each do |x|
+rally.find_all(Common.rally_type(type),:order => [:name]).each do |x|
   puts Common.render(type,x)
 end
