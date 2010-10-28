@@ -9,6 +9,13 @@ class Common
       config
     end
     
+    @@rally_types = {
+      :tags => :tag,
+      :ta   => :task,
+      :de   => :defect,
+      :us   => :hierarchical_requirement
+    }
+    
     @@escapes ={
       #tags
       "<br[ /]*>" => "\n",
@@ -45,6 +52,22 @@ class Common
     
     def std_de(de)
       escape "#{std_rank(de)} #{de.formatted_i_d} #{de.priority} #{de.schedule_state} #{de.state} #{de.owner}\n\t#{de.name}"
+    end
+    
+    def std_tag(tag)
+      escape tag.name
+    end
+    
+    def rally_type(type)
+      @@rally_types[type.to_sym] || type
+    end
+    
+    def can_render?(type)
+      self.respond_to? "std_#{rally_type(type)}"
+    end
+    
+    def render(type,obj)
+      Common.send("std_#{rally_type(type)}".to_sym,obj) if can_render?(type)
     end
   end
 end
