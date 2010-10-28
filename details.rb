@@ -41,11 +41,10 @@ def print_ta(id,rally)
 end
 
 def print_de(id,rally)
-  rally.find(:defect, :order => [:rank, :priority]){
+  rally.find(:defect,:order=>[:rank]){
     equal :formatted_i_d, id
   }.each do |de|
-    rank = de.rank || '---'
-    puts "#{rank} #{de.formatted_i_d} #{de.name}"
+    puts "#{Common.std_rank de} #{de.formatted_i_d} #{de.name}"
     puts "#{de.release} #{de.iteration}"
     puts "Prio:#{de.priority}, State:#{de.state}, Owner:#{de.owner}"
     puts "Sev:#{de.severity}, SchState:#{de.schedule_state}, Found:#{de.found_in_build}"
