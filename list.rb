@@ -21,6 +21,6 @@ rally = RallyRestAPI.new(
   :password => config[:password]
 )
 
-rally.find_all(Common.rally_type(type),:order => [:name]).each do |x|
+rally.find_all(Common.rally_type(type)).each do |x|
   puts Common.render(type,x)
 end

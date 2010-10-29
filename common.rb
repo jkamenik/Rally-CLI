@@ -41,6 +41,10 @@ class Common
       changed
     end
     
+    def std_tags(obj,prefix='',postfix="\n")
+      "#{prefix}#{obj.tags.join(', ')}#{postfix}" if obj.tags.size > 0
+    end
+    
     def std_rank(obj)
       obj.rank || '---'
     end
@@ -54,7 +58,9 @@ class Common
     end
     
     def std_de(de)
-      escape "#{std_rank(de)} #{de.formatted_i_d} #{de.priority} #{de.schedule_state} #{de.state} #{de.owner}\n\t#{de.name}"
+      str =  escape "#{std_rank(de)} #{de.formatted_i_d} #{de.priority} #{de.schedule_state} #{de.state} #{de.owner}\n"
+      str += std_tags(de,"\t")
+      str += "\t#{de.name}"
     end
     
     def std_tag(tag)
