@@ -49,15 +49,15 @@ class Common
       obj.rank || '---'
     end
     
-    def std_us(us)
+    def std_hierarchical_requirement(us)
       escape "#{std_rank(us)} #{us.formatted_i_d} #{us.schedule_state} #{us.owner} #{us.name}"
     end
     
-    def std_ta(ta)
+    def std_task(ta)
       escape "#{std_rank(ta)} #{ta.formatted_i_d}(#{ta.work_product.formatted_i_d}) #{ta.state} #{ta.owner} #{ta.name}"
     end
     
-    def std_de(de)
+    def std_defect(de)
       str =  escape "#{std_rank(de)} #{de.formatted_i_d} #{de.priority} #{de.schedule_state} #{de.state} #{de.owner}\n"
       str += std_tags(de,"\t")
       str += "\t#{de.name}"

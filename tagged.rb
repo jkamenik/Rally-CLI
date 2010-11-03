@@ -45,7 +45,7 @@ rally.find(:hierarchical_requirement, :order => [:rank]){
     end
   }
 }.each do |us|
-  puts Common.std_us us
+  puts Common.render :us, us
 end
 puts '-'*80
 
@@ -63,6 +63,6 @@ des = rally.find(:defect, :order => [:priority]){
     end
   }
 }.each do |de|
-  puts Common.std_de de
+  puts Common.render :de, de
 end
 puts '-'*80
