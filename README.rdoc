@@ -5,7 +5,7 @@ This is my attempt to make rally useable.  It uses the RESTful interface.
 
 = Installation
   sudo gem install rally_rest_api
-  git clone git@github.com:jkamenik/Rally-Sucks.git
+  git clone git@github.com:jkamenik/Rally-CLI.git
 
 = Usage
 == Config file
