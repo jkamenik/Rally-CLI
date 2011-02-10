@@ -42,7 +42,8 @@ class Common
     end
     
     def std_tags(obj,prefix='',postfix="\n")
-      "#{prefix}#{obj.tags.join(', ')}#{postfix}" if obj.tags.size > 0
+      "#{prefix}#{obj.tags.join(', ')}#{postfix}" if obj.tags && obj.tags.size > 0
+      ''
     end
     
     def std_rank(obj)
